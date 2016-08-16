@@ -165,7 +165,7 @@ if __name__ == "__main__":
     a.create()
 
     # b = Manifest(filename=os.path.join(path, 'manifest.xml'))
-    
+
     # print a.diff(b)
     # print '----------------------------------------------------'
     # print a.to_xml_str()
