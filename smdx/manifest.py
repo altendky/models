@@ -1,3 +1,6 @@
+from __future__ import print_function
+from builtins import str
+from builtins import object
 
 import os
 import hashlib
@@ -62,13 +65,13 @@ class Manifest(object):
 
     def diff(self, m):
         diff_str = ''
-        for f, md5 in self.files.iteritems():
+        for f, md5 in self.files.items():
             m_md5 = m.files.get(f)
             if md5 != m_md5:
                 diff_str += '%s: %s  %s\n' % (f, md5, m_md5)
 
         if len(self.files) != len(m.files):
-            for f, md5 in m.files.iteritems():
+            for f, md5 in m.files.items():
                 if self.files.get(f) is None:
                     diff_str += '%s: "None"  %s\n' % (f, md5)
         return diff_str
@@ -86,7 +89,7 @@ class Manifest(object):
                     content = content.replace('\r\n', '\n')
                     md5 = hashlib.md5(content).hexdigest()
                     self.files[f] = md5
-        except Exception, e:
+        except Exception as e:
             raise ManifestError('Error scanning directory %s: %s' % (self.path, str(e)))
 
     def scan_strip(self):
@@ -104,7 +107,7 @@ class Manifest(object):
                         fc.close()
                     md5 = hashlib.md5(content).hexdigest()
                     self.files[f] = md5
-        except Exception, e:
+        except Exception as e:
             raise ManifestError('Error scanning directory %s: %s' % (self.path, str(e)))
 
     def to_xml(self, parent=None, filename=None):
@@ -137,7 +140,7 @@ class Manifest(object):
             f.write(xml)
             f.close()
         else:
-            print xml
+            print(xml)
 
     def from_xml(self, element=None, filename=None):
         if element is None and filename is not None:
