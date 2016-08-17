@@ -86,7 +86,7 @@ class Manifest(object):
                     content = open(filename, 'rb').read()
                     # if content.find('\r\n') >= 0:
                     #     print 'windows file ', self.path
-                    content = content.replace('\r\n', '\n')
+                    content = content.replace(b'\r\n', b'\n')
                     md5 = hashlib.md5(content).hexdigest()
                     self.files[f] = md5
         except Exception as e:
@@ -136,7 +136,7 @@ class Manifest(object):
         if filename is not None:
             if replace_existing is False and os.path.exists(filename):
                 raise ManifestError('File %s already exists' % (filename))
-            f = open(filename, 'w')
+            f = open(filename, 'wb')
             f.write(xml)
             f.close()
         else:
